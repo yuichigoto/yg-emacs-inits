@@ -4,7 +4,7 @@
 ;; https://ja.wikipedia.org/wiki/Unicode%E4%B8%80%E8%A6%A7_0000-0FFF
 
 (require 'whitespace)
-
+(global-whitespace-mode 1)
 (setq whitespace-style '(
 			 face            ; 可視化
 			 trailing        ; 行末
@@ -33,4 +33,4 @@
                       :foreground "gray40"
                       :background "light gray"
                       :underline nil))
-(global-whitespace-mode 1)
+
