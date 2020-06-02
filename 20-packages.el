@@ -1,9 +1,18 @@
-;; Load package repository
-;; ref. http://qiita.com/catatsuy/items/5f1cd86e2522fd3384a0
+; https://melpa.org/#/getting-started
+;
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
-
-;; このパッケージリポジトリは壊れているとのこと
-;; https://qastack.jp/emacs/33061/tls-connection-to-marmalade-repo-org443-is-insecure-after-updating-to-emacs-25
-;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (proto (if no-ssl "http" "https")))
+  (when no-ssl (warn "\
+Your version of Emacs does not support SSL connections,
+which is unsafe because it allows man-in-the-middle attacks.
+There are two things you can do about this warning:
+1. Install an Emacs version that does support SSL and be safe.
+2. Remove this warning from your init file so you won't see it again."))
+  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+  ;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
+  ;; and `package-pinned-packages`. Most users will not need or want to do this.
+  ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+  )
 (package-initialize)
