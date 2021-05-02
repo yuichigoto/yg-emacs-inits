@@ -66,8 +66,9 @@
 
 
 ;;  emacsのウィンドウサイズの設定
-(progn
-  (set-frame-size (selected-frame) 80 25))
+(if window-system
+    (progn
+      (set-frame-size (selected-frame) 80 25)))
 
 ;; 背景、文字の色、カーソルの色の指定
 (progn
