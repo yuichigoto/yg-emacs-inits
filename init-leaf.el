@@ -219,17 +219,15 @@
   :global-minor-mode t)
 
 ;; ローマ字検索を可能にするパッケージMIGEMO
-(leaf migemo
-    :ensure t
-    :require t
-    :custom
-    (migemo-command . "cmigemo")
-    (migemo-options . '("-q" "--emacs"))
-    (migemo-dictionary . "/usr/share/cmigemo/utf-8/migemo-dict")
-    (migemo-user-dictionary . nil)
-    (migemo-regex-dictionary . nil)
-    (migemo-coding-system . 'utf-8-unix)
-    :config
-    (migemo-init))
+(progn
+  (require 'migemo)
+  (setq migemo-command "cmigemo")
+  (setq migemo-options '("-q" "--emacs"))
+  (setq migemo-dictionary "/usr/share/cmigemo/utf-8/migemo-dict")
+  (setq migemo-user-dictionary nil)
+  (setq migemo-regex-dictionary nil)
+  (setq migemo-coding-system 'utf-8-unix)
+  (load-library "migemo")
+  (migemo-init))
 
 (provide 'init)
