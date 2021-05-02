@@ -64,10 +64,6 @@
     :custom ((imenu-list-size . 30)
              (imenu-list-position . 'left))))
 
-;;; ref. https://emacs-jp.github.io/tips/emacs-in-2020ep
-(leaf macrost
-  :ensure t
-  :bind (("C-c e" . macrostep-expand)))
 
 ;;  emacsのウィンドウサイズの設定
 (progn
