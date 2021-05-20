@@ -64,14 +64,11 @@
     :custom ((imenu-list-size . 30)
              (imenu-list-position . 'left))))
 
-;;; ref. https://emacs-jp.github.io/tips/emacs-in-2020ep
-(leaf macrost
-  :ensure t
-  :bind (("C-c e" . macrostep-expand)))
 
 ;;  emacsのウィンドウサイズの設定
-(progn
-  (set-frame-size (selected-frame) 80 25))
+(if window-system
+    (progn
+      (set-frame-size (selected-frame) 80 25)))
 
 ;; 背景、文字の色、カーソルの色の指定
 (progn
@@ -223,17 +220,15 @@
   :global-minor-mode t)
 
 ;; ローマ字検索を可能にするパッケージMIGEMO
-(leaf migemo
-    :ensure t
-    :require t
-    :custom
-    (migemo-command . "cmigemo")
-    (migemo-options . '("-q" "--emacs"))
-    (migemo-dictionary . "/usr/share/cmigemo/utf-8/migemo-dict")
-    (migemo-user-dictionary . nil)
-    (migemo-regex-dictionary . nil)
-    (migemo-coding-system . 'utf-8-unix)
-    :config
-    (migemo-init))
+(progn
+  (require 'migemo)
+  (setq migemo-command "cmigemo")
+  (setq migemo-options '("-q" "--emacs"))
+  (setq migemo-dictionary "/usr/share/cmigemo/utf-8/migemo-dict")
+  (setq migemo-user-dictionary nil)
+  (setq migemo-regex-dictionary nil)
+  (setq migemo-coding-system 'utf-8-unix)
+  (load-library "migemo")
+  (migemo-init))
 
 (provide 'init)
