@@ -25,17 +25,12 @@
 
 ;; this enables this running method
 ;;   emacs -q -l ~/.debug.emacs.d/init.el
-(eval-and-compile
-  (when (or load-file-name byte-compile-current-file)
-    (setq user-emacs-directory
-          (expand-file-name
-           (file-name-directory (or load-file-name byte-compile-current-file))))))
-
+;; <leaf-install-code>
 (eval-and-compile
   (customize-set-variable
-   'package-archives '(("gnu"   . "https://elpa.gnu.org/packages/")
+   'package-archives '(("org" . "https://orgmode.org/elpa/")
                        ("melpa" . "https://melpa.org/packages/")
-                       ("org"   . "https://orgmode.org/elpa/")))
+                       ("gnu" . "https://elpa.gnu.org/packages/")))
   (package-initialize)
   (unless (package-installed-p 'leaf)
     (package-refresh-contents)
@@ -54,6 +49,7 @@
     (leaf-keywords-init)))
 
 ;; ここにいっぱい設定を書く
+(setq byte-compile-warnings '(cl-functions))
 
 ;;; ref. https://emacs-jp.github.io/tips/emacs-in-2020ep
 (leaf leaf
@@ -64,14 +60,6 @@
     :custom ((imenu-list-size . 30)
              (imenu-list-position . 'left))))
 
-;;; ref. https://emacs-jp.github.io/tips/emacs-in-2020ep
-(leaf macrost
-  :ensure t
-  :bind (("C-c e" . macrostep-expand)))
-
-;;  emacsのウィンドウサイズの設定
-(progn
-  (set-frame-size (selected-frame) 80 25))
 
 ;; 背景、文字の色、カーソルの色の指定
 (progn
@@ -100,21 +88,6 @@
   ;; emacsをXのアプリケーションへ貼り付ける
   ;; ときの文字コード
   (set-clipboard-coding-system 'utf-8))
-
-;(progn
-;  (require 'mozc)
-;  (setq default-input-method "japanese-mozc")
-;  (setq mozc-candidate-style 'overlay))
-
-;; emacsで使用するフォントの設定
-;; Windows上のフォント（メイリオフォント）を使っているので
-;; 先にWindows上のフォントを利用できるように設定すること。
-;(progn
-;  (add-to-list 'default-frame-alist '(font . "Meiryo-13.5"))
-;  (custom-set-faces
-;   '(variable-pitch ((t (:family "Meiryo"))))
-;   '(fixed-pitch ((t (:family "Meiryo"))))
-;   ))
 
 ;;参考：
 ;; https://www.emacswiki.org/emacs/WhiteSpace
@@ -223,17 +196,20 @@
   :global-minor-mode t)
 
 ;; ローマ字検索を可能にするパッケージMIGEMO
+;; 以下の辞書のパスは macOS BigSurでの設定
 (leaf migemo
-    :ensure t
-    :require t
-    :custom
+  :ensure t
+  :require t
+  :custom
     (migemo-command . "cmigemo")
     (migemo-options . '("-q" "--emacs"))
-    (migemo-dictionary . "/usr/share/cmigemo/utf-8/migemo-dict")
+    (migemo-dictionary . "/usr/local/Cellar/cmigemo/20110227/share/migemo/utf-8/migemo-dict")
     (migemo-user-dictionary . nil)
     (migemo-regex-dictionary . nil)
     (migemo-coding-system . 'utf-8-unix)
     :config
     (migemo-init))
 
+
 (provide 'init)
+
