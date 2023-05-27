@@ -196,18 +196,23 @@
   :global-minor-mode t)
 
 ;; ローマ字検索を可能にするパッケージMIGEMO
-;; 以下の辞書のパスは macOS BigSurでの設定
+;; cmigemoのパスと辞書のパスはそれぞれの環境に合わせること。以下はApple Slicon CPUの場合。
 (leaf migemo
   :ensure t
   :require t
   :custom
-    (migemo-command . "cmigemo")
+    ;; Intel CPUの場合
+    ;;(migemo-command . "/usr/local/bin/cmigemo")
+    ;; (migemo-dictionary . "/usr/local/Cellar/cmigemo/20110227/share/migemo/utf-8/migemo-dict")
+    ;; Apple Silicon CPUの場合
+    (migemo-command . "/opt/homebrew/bin/cmigemo")
+    (migemo-dictionary . "/opt/homebrew/Cellar/cmigemo/20110227/share/migemo/utf-8/migemo-dict")
     (migemo-options . '("-q" "--emacs"))
-    (migemo-dictionary . "/usr/local/Cellar/cmigemo/20110227/share/migemo/utf-8/migemo-dict")
     (migemo-user-dictionary . nil)
     (migemo-regex-dictionary . nil)
     (migemo-coding-system . 'utf-8-unix)
     :config
+    (load-library "migemo")
     (migemo-init))
 
 
