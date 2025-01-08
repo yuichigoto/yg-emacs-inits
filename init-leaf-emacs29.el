@@ -50,7 +50,7 @@
   :config
   (set-language-environment 'Japanese) ;言語を日本語に
   (prefer-coding-system 'utf-8) ;極力UTF-8を使う
-  (add-to-list 'default-frame-alist '(font . "ricty-15")) ;フォント設定
+  (add-to-list 'default-frame-alist '(font . "Meiryo-15")) ;フォント設定
   (leaf mozc ;; Mozc setting
     :ensure t
     :config
