@@ -240,4 +240,7 @@
                       :background "light gray"
                       :underline nil))
 
+;; shut up, emacs!
+(setq warning-minimum-level :error)
+
 (provide 'init)
