@@ -214,6 +214,8 @@
     (load-library "migemo")
     (migemo-init))
 
+;; shut up, emacs!
+(setq warning-minimum-level :error)
 
 (provide 'init)
 
