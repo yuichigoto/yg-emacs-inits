@@ -261,4 +261,8 @@
 (setq interprogram-cut-function 'wl-copy)
 (setq interprogram-paste-function 'wl-paste)
 
+;; Not use FCITX5 on Emacs
+;; via https://blog.ingage.jp/entry/2024/03/05/090000
+(setq pgtk-use-im-context-on-new-connection nil)
+
 (provide 'init)
