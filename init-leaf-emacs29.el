@@ -139,9 +139,11 @@
          ("M-g f" . consult-flymake)
 
          ;; C-M-s bindings
-         ("C-s" . c/consult-line)       ; isearch-forward
+         ;("C-s" . c/consult-line)       ; isearch-forward
+         ("C-s" . isearch-forward)       
          ("C-M-s" . nil)                ; isearch-forward-regexp
-         ("C-M-s s" . isearch-forward)
+         ;("C-M-s s" . isearch-forward)
+         ("C-M-s s" . c/consult-line)       ; isearch-forward
          ("C-M-s C-s" . isearch-forward-regexp)
          ("C-M-s r" . consult-ripgrep)
 
